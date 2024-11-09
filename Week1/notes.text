@@ -1,0 +1,25 @@
+1. JVM (Java Virtual Machine)
+    The JVM is an abstract machine that enables your computer to run a Java program. "Write Once, Run Anywhere" principle.
+2. JRE (Java Runtime Environment)
+    The JRE provides the libraries, Java class files, and other resources required to run Java applications.  Without the JRE, we wouldn’t be able to run a Java program. 
+3. JDK (Java Development Kit)
+    It’s primarily used by developers to write, compile, and debug Java programs.
+
+Core Object-Oriented Programming (OOP) concepts
+
+1. Objects and Classes
+Class: A class is a blueprint or template for creating objects. It defines a data structure by describing the attributes (fields) and behaviors (methods) that its objects will have.
+Object: An object is an instance of a class. When you create an object, you allocate memory for its attributes and gain access to its behaviors as defined by the class.
+
+2. Inheritance
+Definition: Inheritance allows a class (called the child or subclass) to inherit attributes and behaviors from another class (called the parent or superclass). This promotes code reuse and hierarchical classification.
+How it works: In Java, inheritance is achieved using the extends keyword.
+
+2.1 Single Inheritance
+Definition: A subclass inherits from only one superclass.
+
+2.2 Multilevel Inheritance
+Definition: A subclass inherits from another subclass, forming a chain of inheritance.
+
+
+

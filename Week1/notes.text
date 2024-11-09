@@ -38,3 +38,10 @@ Definition: In compile-time polymorphism, the method to be called is resolved at
 
 3.2 Run-Time Polymorphism (Method Overriding)
 Definition: In run-time polymorphism, the method to be called is determined at runtime. This is achieved by method overriding, where a subclass provides a specific implementation for a method that is already defined in the superclass
+
+4. Abstraction
+Definition: Abstraction hides implementation details and only exposes essential features. In Java, abstraction is achieved using abstract classes and interfaces.
+
+5. Encapsulation
+Definition: Encapsulation restricts direct access to an object’s data and can control how the data is modified. This is done by making fields private and providing public getters and setters to access and modify them.
+How it works: Encapsulation allows data hiding and ensures controlled access to sensitive data.

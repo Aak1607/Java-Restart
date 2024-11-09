@@ -1,5 +1,6 @@
 package Week1.OOPS;
 
+//Example: A Dog class inherits from Animal, and a Puppy class inherits from Dog
     class Animal{
         void eat(){
             System.out.println("Animal is eating");

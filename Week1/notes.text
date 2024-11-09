@@ -21,5 +21,20 @@ Definition: A subclass inherits from only one superclass.
 2.2 Multilevel Inheritance
 Definition: A subclass inherits from another subclass, forming a chain of inheritance.
 
+2.3 Hierarchical Inheritance
+Definition: Multiple subclasses inherit from a single superclass.
 
+2.4 Multiple Inheritance (Through Interfaces)
+Definition: Java does not support multiple inheritance directly with classes, but it allows a class to implement multiple interfaces.
 
+2.5 Hybrid Inheritance (Combination of Multiple Inheritance Types)
+Definition: A combination of multiple inheritance types (e.g., a class inherits from one class and implements multiple interfaces).
+
+3. Polymorphism in Java
+Polymorphism allows you to use a single entity (method or class) in different ways. It is primarily divided into Compile-Time Polymorphism and Run-Time Polymorphism.
+
+3.1 Compile-Time Polymorphism (Method Overloading)
+Definition: In compile-time polymorphism, the method to be called is resolved at compile time. This is achieved by method overloading, where multiple methods with the same name exist, but with different parameters (either in number or type).
+
+3.2 Run-Time Polymorphism (Method Overriding)
+Definition: In run-time polymorphism, the method to be called is determined at runtime. This is achieved by method overriding, where a subclass provides a specific implementation for a method that is already defined in the superclass

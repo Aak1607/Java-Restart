@@ -14,6 +14,15 @@ Object: An object is an instance of a class. When you create an object, you allo
 2. Inheritance
 Definition: Inheritance allows a class (called the child or subclass) to inherit attributes and behaviors from another class (called the parent or superclass). This promotes code reuse and hierarchical classification.
 How it works: In Java, inheritance is achieved using the extends keyword.
+Real-World Example: Consider a company hierarchy.
+Parent Class: Employee
+Properties: name, id, department
+Methods: work(), takeBreak()
+
+Child Class: Manager
+Inherits Employee properties and methods
+Adds properties: teamSize, reportingEmployees
+Adds methods: conductMeeting(), approveLeave()
 
 2.1 Single Inheritance
 Definition: A subclass inherits from only one superclass.
@@ -32,6 +41,11 @@ Definition: A combination of multiple inheritance types (e.g., a class inherits 
 
 3. Polymorphism in Java
 Polymorphism allows you to use a single entity (method or class) in different ways. It is primarily divided into Compile-Time Polymorphism and Run-Time Polymorphism.
+Real-World Example: Payment processing in an e-commerce system.
+Common Interface: Payment
+Methods: processPayment()
+Classes: CreditCardPayment, PayPalPayment
+Both implement processPayment() differently
 
 3.1 Compile-Time Polymorphism (Method Overloading)
 Definition: In compile-time polymorphism, the method to be called is resolved at compile time. This is achieved by method overloading, where multiple methods with the same name exist, but with different parameters (either in number or type).
@@ -41,7 +55,15 @@ Definition: In run-time polymorphism, the method to be called is determined at r
 
 4. Abstraction
 Definition: Abstraction hides implementation details and only exposes essential features. In Java, abstraction is achieved using abstract classes and interfaces.
+Real-World Example: Using a smartphone.
+Abstract Class: Smartphone
+Abstract methods: makeCall(), sendText()
+Concrete Classes: AndroidPhone, iPhone
 
 5. Encapsulation
 Definition: Encapsulation restricts direct access to an object’s data and can control how the data is modified. This is done by making fields private and providing public getters and setters to access and modify them.
 How it works: Encapsulation allows data hiding and ensures controlled access to sensitive data.
+Real-World Example: A bank account.
+Class: BankAccount
+Private properties: accountNumber, balance
+Public methods: deposit(), withdraw(), getBalance()

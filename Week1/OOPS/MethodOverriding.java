@@ -1,36 +1,29 @@
 package Week1.OOPS;
 
+
 //Example: A Cat class overrides the sound() method of an Animal class. The method that gets executed depends on the object type at runtime.
 
-class Animal {
-    void sound() {
-        System.out.println("Animal makes a sound");
-    }
+//Superclass
+class Fruit {
+ public void display() {
+     System.out.println("I am a fruit");
+ }
 }
 
-class Dog extends Animal {
-    @Override
-    void sound() {
-        System.out.println("Dog barks");
-    }
-}
-
-class Cat extends Animal {
-    @Override
-    void sound() {
-        System.out.println("Cat meows");
-    }
+//Subclass
+class Apple extends Fruit {
+ @Override
+ public void display() {
+     System.out.println("I am an apple");
+ }
 }
 
 public class MethodOverriding {
-    public static void main(String[] args) {
-        Animal myAnimal = new Animal();
-        Animal myDog = new Dog();   // Animal reference but Dog object
-        Animal myCat = new Cat();   // Animal reference but Cat object
-
-        myAnimal.sound();  // Output: Animal makes a sound
-        myDog.sound();     // Output: Dog barks
-        myCat.sound();     // Output: Cat meows
-    }
-    
+ public static void main(String[] args) {
+     Fruit fruit = new Fruit();
+     fruit.display(); // Output: I am a fruit
+     
+     Apple apple = new Apple();
+     apple.display(); // Output: I am an apple
+}
 }

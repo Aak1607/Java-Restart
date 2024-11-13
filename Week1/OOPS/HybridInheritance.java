@@ -1,25 +1,35 @@
 package Week1.OOPS;
 
-interface Playable {
-    void play();
-}
-
-class Animal {
-    void eat() {
-        System.out.println("Animal is eating");
-    }
-}
-
-class Dog extends Animal implements Playable {
-    public void play() {
-        System.out.println("Dog is playing");
-    }
-}
+class Vehicle {
+	int speed; int fuel; 
+	void drive() {
+		System.out.println("Driving at speed: " + speed); 
+		}
+	}
+interface LandVehicle { 
+	void driveOnLand(); 
+	} interface AirVehicle { 
+		void fly(); 
+		} 
+	class FlyingCar extends Vehicle implements LandVehicle, AirVehicle { 
+		int numberOfWheels; int altitude;
+		@Override public void driveOnLand() { 
+			System.out.println("Driving on land with " + numberOfWheels + " wheels.");
+			} 
+		@Override public void fly() { 
+			System.out.println("Flying at altitude: " + altitude); 
+			}
+	}
 
 public class HybridInheritance {
     public static void main(String[] args) {
-        Dog dog = new Dog();
-        dog.eat();  // Inherited from Animal
-        dog.play(); // Implemented from Playable
+    	FlyingCar myFlyingCar = new FlyingCar(); 
+    	myFlyingCar.speed = 100; 
+    	myFlyingCar.fuel = 50; 
+    	myFlyingCar.numberOfWheels = 4;
+    	myFlyingCar.altitude = 10000;
+    	myFlyingCar.drive(); 
+    	myFlyingCar.driveOnLand(); 
+    	myFlyingCar.fly();
     }
 }

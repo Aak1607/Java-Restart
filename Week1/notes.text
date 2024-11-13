@@ -1,18 +1,23 @@
 1. JVM (Java Virtual Machine)
-    The JVM is an abstract machine that enables your computer to run a Java program. "Write Once, Run Anywhere" principle.
+    The JVM is an abstract machine that enables your computer to run a Java program. "Write Once, Run Anywhere" 
+    principle.
 2. JRE (Java Runtime Environment)
-    The JRE provides the libraries, Java class files, and other resources required to run Java applications.  Without the JRE, we wouldn’t be able to run a Java program. 
+    The JRE provides the libraries, Java class files, and other resources required to run Java applications.  
+    Without the JRE, we wouldn’t be able to run a Java program. 
 3. JDK (Java Development Kit)
     It’s primarily used by developers to write, compile, and debug Java programs.
 
 Core Object-Oriented Programming (OOP) concepts
 
 1. Objects and Classes
-Class: A class is a blueprint or template for creating objects. It defines a data structure by describing the attributes (fields) and behaviors (methods) that its objects will have.
-Object: An object is an instance of a class. When you create an object, you allocate memory for its attributes and gain access to its behaviors as defined by the class.
+Class: A class is a blueprint or template for creating objects. It defines a data structure by describing the 
+attributes (fields) and behaviors (methods) that its objects will have.
+Object: An object is an instance of a class. When you create an object, you allocate memory for its attributes and 
+gain access to its behaviors as defined by the class.
 
 2. Inheritance
-Definition: Inheritance allows a class (called the child or subclass) to inherit attributes and behaviors from another class (called the parent or superclass). This promotes code reuse and hierarchical classification.
+Definition: Inheritance allows a class (called the child or subclass) to inherit attributes and behaviors from 
+another class (called the parent or superclass). This promotes code reuse and hierarchical classification.
 How it works: In Java, inheritance is achieved using the extends keyword.
 Real-World Example: Consider a company hierarchy.
 Parent Class: Employee
@@ -34,13 +39,16 @@ Definition: A subclass inherits from another subclass, forming a chain of inheri
 Definition: Multiple subclasses inherit from a single superclass.
 
 2.4 Multiple Inheritance (Through Interfaces)
-Definition: Java does not support multiple inheritance directly with classes, but it allows a class to implement multiple interfaces.
+Definition: Java does not support multiple inheritance directly with classes, but it allows a class to implement
+ multiple interfaces.
 
 2.5 Hybrid Inheritance (Combination of Multiple Inheritance Types)
-Definition: A combination of multiple inheritance types (e.g., a class inherits from one class and implements multiple interfaces).
+Definition: A combination of multiple inheritance types (e.g., a class inherits from one class and implements 
+multiple interfaces).
 
 3. Polymorphism in Java
-Polymorphism allows you to use a single entity (method or class) in different ways. It is primarily divided into Compile-Time Polymorphism and Run-Time Polymorphism.
+Polymorphism allows you to use a single entity (method or class) in different ways. It is primarily divided into 
+Compile-Time Polymorphism and Run-Time Polymorphism.
 Real-World Example: Payment processing in an e-commerce system.
 Common Interface: Payment
 Methods: processPayment()
@@ -48,22 +56,52 @@ Classes: CreditCardPayment, PayPalPayment
 Both implement processPayment() differently
 
 3.1 Compile-Time Polymorphism (Method Overloading)
-Definition: In compile-time polymorphism, the method to be called is resolved at compile time. This is achieved by method overloading, where multiple methods with the same name exist, but with different parameters (either in number or type).
+Definition: In compile-time polymorphism, the method to be called is resolved at compile time. This is achieved by 
+method overloading, where multiple methods with the same name exist, but with different parameters (either in number 
+or type).
 
 3.2 Run-Time Polymorphism (Method Overriding)
-Definition: In run-time polymorphism, the method to be called is determined at runtime. This is achieved by method overriding, where a subclass provides a specific implementation for a method that is already defined in the superclass
+Definition: In run-time polymorphism, the method to be called is determined at runtime. This is achieved by method 
+overriding, where a subclass provides a specific implementation for a method that is already defined in the 
+superclass
 
 4. Abstraction
-Definition: Abstraction hides implementation details and only exposes essential features. In Java, abstraction is achieved using abstract classes and interfaces.
+Definition: Abstraction hides implementation details and only exposes essential features. In Java, abstraction is 
+achieved using abstract classes and interfaces.
 Real-World Example: Using a smartphone.
 Abstract Class: Smartphone
 Abstract methods: makeCall(), sendText()
 Concrete Classes: AndroidPhone, iPhone
 
 5. Encapsulation
-Definition: Encapsulation restricts direct access to an object’s data and can control how the data is modified. This is done by making fields private and providing public getters and setters to access and modify them.
+Definition: Encapsulation restricts direct access to an object’s data and can control how the data is modified. 
+This is done by making fields private and providing public getters and setters to access and modify them.
 How it works: Encapsulation allows data hiding and ensures controlled access to sensitive data.
 Real-World Example: A bank account.
 Class: BankAccount
 Private properties: accountNumber, balance
 Public methods: deposit(), withdraw(), getBalance()
+
+Compare abstract classes and interfaces
+
+(abstract)
+Can have both abstract and non-abstract methods.
+Can have instance variables.
+Can have constructors.
+Supports multiple types of method implementations.
+A class can extend only one abstract class (single inheritance).
+
+(interfaces)
+An interface is a reference type in Java, similar to a class, that can contain only constants, method signatures, 
+default methods, static methods, and nested types. Interfaces cannot contain instance fields.
+
+Key Points:
+Can only have abstract methods (until Java 8 where default and static methods are allowed).
+Cannot have instance variables, only constants (final static variables).
+No constructors allowed.
+Supports multiple inheritance (a class can implement multiple interfaces).
+All methods are implicitly abstract (unless marked as default or static).
+
+
+
+

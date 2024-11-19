@@ -11,9 +11,12 @@ public class Factorial {
 
         // Calculate the factorial 
         long factorial = calculateFactorial(input); 
+
         // Display the result 
         System.out.println("The factorial of " + input + " is " + factorial); 
-    } // Method to calculate factorial 
+    } 
+    
+    // Method to calculate factorial 
     public static long calculateFactorial(int num) {
          if (num < 0) { 
             throw new IllegalArgumentException("Number must be non-negative."); 

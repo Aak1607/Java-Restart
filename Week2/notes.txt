@@ -1,0 +1,45 @@
+Lambda Expressions
+Definition: Lambda expressions provide a clear and concise way to represent a method interface using an expression.
+They enable functional programming in Java.
+
+Key Topics in Lambda Expressions
+Syntax:
+Basic syntax: (parameters) -> expression or (parameters) -> { statements; }
+Example: (a, b) -> a + b
+
+Functional Interfaces:
+A functional interface is an interface with a single abstract method.
+Lambda expressions implement the method defined by the functional interface.
+
+Types of Lambda Expressions:
+Zero parameter: () -> System.out.println("Hello World");
+One parameter: (a) -> a * 2
+Multiple parameters: (a, b) -> a + b
+
+Use Cases:
+Iterating over a collection: list.forEach(item -> System.out.println(item));
+Event handling: button.addActionListener(e -> System.out.println("Button clicked"));
+
+Collections
+Definition: Collections are frameworks that provide an architecture to store and manipulate a group of objects. 
+Java provides several classes and interfaces for collections to enhance programming flexibility and efficiency.
+
+Common Collection Types:
+List: An ordered collection (also known as a sequence). Examples: ArrayList, LinkedList.
+Set: A collection that contains no duplicate elements. Examples: HashSet, TreeSet.
+Map: An object that maps keys to values. Examples: HashMap, TreeMap.
+
+Common Methods:
+
+add(): Adds an element to the collection.
+remove(): Removes an element from the collection.
+contains(): Checks if an element exists in the collection.
+size(): Returns the number of elements in the collection.
+clear(): Removes all elements from the collection.
+
+Iterating Over Collections:
+
+Using a for loop
+Using an iterator
+Using the forEach method with lambda expressions
+

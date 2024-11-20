@@ -102,6 +102,30 @@ No constructors allowed.
 Supports multiple inheritance (a class can implement multiple interfaces).
 All methods are implicitly abstract (unless marked as default or static).
 
+Exception Handling
+Definition: Exception handling is a mechanism to handle runtime errors, ensuring the normal flow of the application 
+is maintained. It allows a program to deal with unexpected situations gracefully.
+
+Checked Exceptions: These exceptions are checked at compile-time. They force the programmer to handle the exception 
+using try-catch blocks or by declaring them with the throws keyword. Examples include IOException, SQLException.
+
+Unchecked Exceptions: These exceptions are not checked at compile-time but occur during runtime. They are subclasses
+of RuntimeException and include exceptions like NullPointerException, ArrayIndexOutOfBoundsException.
+
+Key Points:
+Try-Catch Block: Used to catch exceptions and handle them.
+Finally Block: Executes code regardless of whether an exception occurred or not.
+Throw Keyword: Used to explicitly throw an exception.
+Throws Keyword: Indicates that a method can throw an exception.
+
+Singleton Pattern
+Definition: The Singleton Pattern ensures that a class has only one instance and provides a global point of access
+to it. This is useful when exactly one object is needed to coordinate actions across the system.
+
+Key Points:
+Private Constructor: Prevents instantiation from other classes.
+Static Instance: Holds the single instance of the class.
+Public Static Method: Provides a global access point to the instance.
 
 
 

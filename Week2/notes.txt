@@ -1,3 +1,20 @@
+Iterator Interface
+Iterator is an object that can be used to loop through collections.
+As the name suggests, it is used to iterate over the elements. It is used to modify and iterate over the elements in a collection.
+
+There are 3 methods in the Iterator interface:
+-> public Object next()- It returns the next element in the collection. It throws the exception of 
+          NoSuchElementException if there is no next element.
+-> public void remove()- It removes the current element from the collection.
+-> public boolean hasNext()- It returns true if there are more elements in the collection. Else, returns false.
+
+Iterable Interface
+The Iterable Interface allows the collection to be iterated over. 
+The root interface for the entire collection framework is termed the Iterable Interface. 
+The collection interface extends the iterable interface, hence the sub-classes of the collection interface also implement the iterable interface, i.e., it automatically becomes a part of the iterable interface.
+Syntax:
+Iterator <E> iterator()
+
 Lambda Expressions
 Definition: Lambda expressions provide a clear and concise way to represent a method interface using an expression.
 They enable functional programming in Java.
@@ -37,19 +54,35 @@ contains(): Checks if an element exists in the collection.
 size(): Returns the number of elements in the collection.
 clear(): Removes all elements from the collection.
 
-Iterator Interface
-Iterator is an object that can be used to loop through collections.
-As the name suggests, it is used to iterate over the elements. It is used to modify and iterate over the elements in a collection.
+List Interface
+The list interface extends the collection interface. A list is used to store ordered collection of data and it 
+may contain duplicates. Ordered collection means the order in which the elements are being inserted and they 
+contain a specific value. The elements present, can be accessed or inserted by their position in the list using 
+zero-based indexing. The list interface is implemented by LinkedList, ArrayList, Vectors and Stack classes. 
+They are an important part of collections in Java.
 
-There are 3 methods in the Iterator interface:
--> public Object next()- It returns the next element in the collection. It throws the exception of 
-          NoSuchElementException if there is no next element.
--> public void remove()- It removes the current element from the collection.
--> public boolean hasNext()- It returns true if there are more elements in the collection. Else, returns false.
+There are three classes implemented by the list interface and they are given below.
+Syntax
+List<Data-Type>linkedlist= new LinkedList<Data-Type>();    
+List<Data-Type>arraylist= new ArrayList<Data-Type>();
+List<Data-Type>vector= new Vector<Data-Type>();
 
-Iterable Interface
-The Iterable Interface allows the collection to be iterated over. 
-The root interface for the entire collection framework is termed the Iterable Interface. 
-The collection interface extends the iterable interface, hence the sub-classes of the collection interface also implement the iterable interface, i.e., it automatically becomes a part of the iterable interface.
-Syntax:
-Iterator <E> iterator()
+Vector
+Like ArrayList, Vectors in Java are used for dynamic arrays.
+It extends the AbstractList and implements the List interface.
+
+Stack:-
+Stack class extends the Vector class and it is its subclass.
+It works on the principle of Last-In, First-Out.
+In order to put an object on the top of the stack, we call the push() method.
+To remove and return the top element in the stack, we call pop() method.
+There are other methods like peek(), search() and empty() which are used to perform operations on the stack
+
+
+
+
+
+
+
+
+

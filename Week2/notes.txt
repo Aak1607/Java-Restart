@@ -37,9 +37,19 @@ contains(): Checks if an element exists in the collection.
 size(): Returns the number of elements in the collection.
 clear(): Removes all elements from the collection.
 
-Iterating Over Collections:
+Iterator Interface
+Iterator is an object that can be used to loop through collections.
+As the name suggests, it is used to iterate over the elements. It is used to modify and iterate over the elements in a collection.
 
-Using a for loop
-Using an iterator
-Using the forEach method with lambda expressions
+There are 3 methods in the Iterator interface:
+-> public Object next()- It returns the next element in the collection. It throws the exception of 
+          NoSuchElementException if there is no next element.
+-> public void remove()- It removes the current element from the collection.
+-> public boolean hasNext()- It returns true if there are more elements in the collection. Else, returns false.
 
+Iterable Interface
+The Iterable Interface allows the collection to be iterated over. 
+The root interface for the entire collection framework is termed the Iterable Interface. 
+The collection interface extends the iterable interface, hence the sub-classes of the collection interface also implement the iterable interface, i.e., it automatically becomes a part of the iterable interface.
+Syntax:
+Iterator <E> iterator()

@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class StackExample {
     public static void main(String[] args) {
-        //creating a Stack
+    //creating a Stack
     Stack<Integer> s= new Stack<Integer>();
     
     //displaying the initial size

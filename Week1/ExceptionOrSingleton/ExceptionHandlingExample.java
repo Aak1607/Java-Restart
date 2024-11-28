@@ -1,4 +1,4 @@
-package Week1.EcceptionorSingleton;
+package Week1.ExceptionOrSingleton;
 
 public class ExceptionHandlingExample {
     public static void main(String[] args) { 

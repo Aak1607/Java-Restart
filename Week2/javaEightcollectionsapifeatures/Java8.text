@@ -1,0 +1,32 @@
+Major Java 8 Features Introduced
+There are a few major Java 8 features mentioned below:
+
+1.Lambda Expressions: Concise functional code using ->.
+2.Functional Interfaces: Single-method interfaces.
+3.Introduced and Improved APIs:
+3.1.Stream API: Efficient Data Manipulation.
+3.2 Date/Time API: Robust Date and Time Handling.
+3.3 Collection API Improvements: Enhanced Methods for Collections (e.g., removeIf, replaceAll).
+3.4 Concurrency API Improvements: New classes for parallel processing (e.g., CompletableFuture).
+4. Optional Class: Handle null values safely.
+5. forEach() Method in Iterable Interface: Executes an action for each element in a Collection.
+6. Default Methods: Evolve interfaces without breaking compatibility.
+7. Static Methods: Allows adding methods with default implementations to interfaces.
+8. Method References: Refer to methods easily.
+
+Java 8 Features:- 
+Lambda Expressions
+Functional Interfaces
+Method Reference
+Streams
+Comparable and Comparator
+Optional Class
+Date/Time API
+Miscellaneous
+
+Lambda Expressions
+Lambda Expression basically expresses an instance of the functional interface, in other words, you can say it
+ provides a clear and concise way to represent a method of the functional interface using an expression. Lambda
+  Expressions are added in Java 8.
+
+

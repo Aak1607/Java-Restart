@@ -1,0 +1,21 @@
+Java 8 Collections API Features:-
+Java 8 biggest changes are related to Collection APIs. Some of the important changes and improvements are:
+1.Introduction of Stream API for sequential as well as parallel processing, you should read Java Stream API Tutorial
+for more details.
+2.Iterable interface has been extended with forEach() default method for iterating over a collection.
+3.Lambda Expression and Functional interfaces are mostly beneficial with Collection API classes.
+
+Java 10 Collections API Changes:-
+List.copyOf, Set.copyOf, and Map.copyOf methods to create unmodifiable collections.
+Collectors class gets various methods for collecting unmodifiable collections (Set, List, Map). 
+These method names are toUnmodifiableList, toUnmodifiableSet, and toUnmodifiableMap.
+Let’s look at an example of these new Java 10 Collections API methods usage.
+
+Java 11 Collections API Changes:-
+A new default method toArray(IntFunction<T[]> generator) added in the Collection interface. This method returns an 
+array containing all of the elements in this collection, using the provided generator function to allocate the 
+returned array.
+
+
+
+

@@ -78,6 +78,12 @@ In order to put an object on the top of the stack, we call the push() method.
 To remove and return the top element in the stack, we call pop() method.
 There are other methods like peek(), search() and empty() which are used to perform operations on the stack
 
+TreeSet
+The TreeSet class implements the Set Interface.
+It uses a tree to store the elements.
+TreeSet contains unique elements.
+The access and retrieval time is very fast.
+
 
 
 

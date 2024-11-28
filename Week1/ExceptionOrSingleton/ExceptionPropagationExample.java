@@ -1,4 +1,4 @@
-package Week1.EcceptionorSingleton;
+package Week1.ExceptionOrSingleton;
 
 public class ExceptionPropagationExample {
     

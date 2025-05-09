@@ -17,3 +17,4 @@ public class CollectorsExample {
     }
 }
 //The Collectors class provides utilities for processing collections efficiently
+// groupingBy() groups elements by key.✔ counting() counts occurrences.

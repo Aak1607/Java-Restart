@@ -1,0 +1,90 @@
+Spring AOP (Aspect-Oriented Programming)
+----------------------------------------
+### **Spring AOP (Aspect-Oriented Programming)**
+Spring **Aspect-Oriented Programming (AOP)** allows us to **separate cross-cutting concerns** (like logging, security, and transactions) from the main business logic, making the code cleaner and modular.
+
+### **Key Spring AOP Annotations**
+Spring provides several annotations to define aspects and their behaviors:
+
+#### **1. `@Aspect` (Defines an Aspect)**
+- Marks a class as an Aspect, meaning it contains reusable behaviors for multiple methods.
+- Example:
+```java
+@Aspect
+@Component
+public class LoggingAspect {
+    // Aspect logic goes here
+}
+```
+
+#### **2. `@Before` (Runs Before Method Execution)**
+- Executes advice **before** the target method runs.
+- Example:
+```java
+@Before("execution(* com.example.Service.*(..))")
+public void beforeAdvice() {
+    System.out.println("Before executing the method...");
+}
+```
+**Use Case:** Logging method calls or validating inputs.
+
+#### **3. `@After` (Runs After Method Execution)**
+- Executes advice **after** the target method completes.
+- Example:
+```java
+@After("execution(* com.example.Service.*(..))")
+public void afterAdvice() {
+    System.out.println("Method execution completed.");
+}
+```
+**Use Case:** Closing resources or updating logs.
+
+#### **4. `@Around` (Wraps Method Execution)**
+- Runs **before and after** the target method, giving full control over execution.
+- Example:
+```java
+@Around("execution(* com.example.Service.*(..))")
+public Object aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
+    System.out.println("Before execution...");
+    Object result = joinPoint.proceed(); // Run the actual method
+    System.out.println("After execution...");
+    return result;
+}
+```
+**Use Case:** Performance monitoring or security checks.
+
+---
+
+### **How Spring AOP Works**
+- **Join Point:** Represents where AOP logic is applied (method execution, object initialization, etc.).
+- **Advice:** Code that runs before, after, or around the method.
+- **Pointcut:** Defines which methods should be intercepted.
+- **Aspect:** A class that contains advice and pointcuts.
+
+---
+
+### **Example: Logging Aspect in Spring**
+```java
+@Aspect
+@Component
+public class LoggingAspect {
+
+    @Before("execution(* com.example.MyService.*(..))")
+    public void logBefore() {
+        System.out.println("Logging before method execution...");
+    }
+
+    @After("execution(* com.example.MyService.*(..))")
+    public void logAfter() {
+        System.out.println("Logging after method execution...");
+    }
+}
+```
+- Every method in `MyService` will now trigger **logging** before and after execution.
+
+---
+
+### **Why Use Spring AOP?**
+✔ **Reduces Code Duplication** (No need to write logging/security checks everywhere).  
+✔ **Improves Maintainability** (Keeps business logic clean).  
+✔ **Provides Centralized Control** (Apply behavior changes easily).  

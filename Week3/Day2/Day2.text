@@ -1,0 +1,708 @@
+### **Spring Core Basics**
+
+---
+
+#### **1. Spring Bean Scopes**
+
+In Spring, **Bean Scopes** define the lifecycle and visibility of a bean within the Spring container. The main scopes are:
+
+| **Scope**       | **Description**                                                    | **Use Case**                                     |
+| --------------- | ------------------------------------------------------------------ | ------------------------------------------------ |
+| **Singleton**   | Only one instance per Spring container. This is the default scope. | Shared components like services or repositories. |
+| **Prototype**   | Creates a new instance every time it is requested.                 | Non-shared, stateful objects.                    |
+| **Request**     | One instance per HTTP request (only in web-aware contexts).        | Request-specific data like user sessions.        |
+| **Session**     | One instance per HTTP session (only in web-aware contexts).        | User-specific session data.                      |
+| **Application** | One instance per ServletContext (only in web-aware contexts).      | Shared data across the entire web application.   |
+
+**Example:**
+
+```java
+// Service.java
+import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
+
+@Component
+@Scope("singleton")
+public class SingletonService {
+    public SingletonService() {
+        System.out.println("SingletonService Created");
+    }
+}
+
+// MainApp.java
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        
+        SingletonService s1 = context.getBean(SingletonService.class);
+        SingletonService s2 = context.getBean(SingletonService.class);
+        
+        System.out.println("Are both beans the same? " + (s1 == s2));  // Should print true
+        
+        context.close();
+    }
+}
+```
+
+---
+
+#### **2. Bean Life Cycle (init, destroy methods)**
+
+Spring manages the complete lifecycle of beans, including:
+
+* **Initialization:** When the bean is created and dependencies are injected.
+* **Destruction:** When the bean is removed from the context (only for singleton scope).
+
+**Common Methods:**
+
+* **`@PostConstruct` and `@PreDestroy`** (annotations)
+* **`initMethod` and `destroyMethod`** (XML or Java configuration)
+
+**Example:**
+
+```java
+// MyBean.java
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import org.springframework.stereotype.Component;
+
+@Component
+public class MyBean {
+    
+    @PostConstruct
+    public void init() {
+        System.out.println("MyBean Initialized");
+    }
+    
+    @PreDestroy
+    public void destroy() {
+        System.out.println("MyBean Destroyed");
+    }
+}
+
+// AppConfig.java
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig {
+}
+
+// MainApp.java
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        
+        // Just to trigger initialization
+        context.getBean(MyBean.class);
+        
+        context.close();  // Trigger destruction
+    }
+}
+```
+
+---
+
+#### **3. Spring Core Annotations: @Component, @Autowired, @Qualifier**
+
+* **`@Component`**: Marks a class as a Spring bean.
+* **`@Autowired`**: Automatically injects the dependency.
+* **`@Qualifier`**: Used when multiple beans of the same type are present.
+
+**Example:**
+
+```java
+// Service.java
+import org.springframework.stereotype.Component;
+
+@Component
+public class EmailService {
+    public void sendEmail(String message) {
+        System.out.println("Email sent: " + message);
+    }
+}
+
+// Notification.java
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Notification {
+    
+    @Autowired
+    private EmailService emailService;
+    
+    public void notifyUser(String message) {
+        emailService.sendEmail(message);
+    }
+}
+
+// MainApp.java
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        
+        Notification notification = context.getBean(Notification.class);
+        notification.notifyUser("Hello, Spring!");
+        
+        context.close();
+    }
+}
+```
+
+---
+
+### **Data Structures and Algorithms (DSA)**
+
+#### **4. Stack Basics (Push, Pop, Min Stack)**
+
+* **Push:** Add an element to the stack.
+* **Pop:** Remove the top element from the stack.
+* **Min Stack:** Supports `push`, `pop`, and `getMin` operations in constant time.
+
+**Example:**
+
+```java
+import java.util.Stack;
+
+class MinStack {
+    private Stack<Integer> stack = new Stack<>();
+    private Stack<Integer> minStack = new Stack<>();
+    
+    public void push(int x) {
+        stack.push(x);
+        if (minStack.isEmpty() || x <= minStack.peek()) {
+            minStack.push(x);
+        }
+    }
+    
+    public int pop() {
+        if (stack.isEmpty()) return -1;
+        int removed = stack.pop();
+        if (removed == minStack.peek()) {
+            minStack.pop();
+        }
+        return removed;
+    }
+    
+    public int getMin() {
+        return minStack.isEmpty() ? -1 : minStack.peek();
+    }
+    
+    public int peek() {
+        return stack.isEmpty() ? -1 : stack.peek();
+    }
+}
+
+// Test the MinStack
+public class Main {
+    public static void main(String[] args) {
+        MinStack minStack = new MinStack();
+        minStack.push(5);
+        minStack.push(2);
+        minStack.push(3);
+        minStack.push(1);
+        
+        System.out.println("Minimum: " + minStack.getMin());  // 1
+        minStack.pop();
+        System.out.println("Minimum after pop: " + minStack.getMin());  // 2
+    }
+}
+```
+
+---
+
+### **System Design**
+
+#### **5. Service Registry (Eureka)**
+
+* **What is Eureka?**
+
+  * Part of the Netflix OSS stack.
+  * Used for service discovery in microservices architectures.
+  * Allows services to register themselves and discover other services.
+
+**Key Features:**
+
+* **Self-Registration:** Services register themselves at runtime.
+* **Self-Discovery:** Clients discover other services using Eureka.
+* **Load Balancing:** Distributes traffic across instances.
+* **Health Checks:** Periodically checks the health of registered services.
+
+**Basic Setup:**
+
+1. Add the Eureka server dependency.
+2. Use `@EnableEurekaServer` for the registry server.
+3. Use `@EnableEurekaClient` for each microservice.
+
+Let's set up a simple **Eureka Server** and **Eureka Client** using **Spring Boot**.
+
+---
+
+### **1. Setting Up the Eureka Server**
+
+#### **Step 1: Create a Spring Boot Project for the Eureka Server**
+
+* Use **Spring Initializr** (start.spring.io).
+* Choose **Maven Project** and **Java**.
+* Add the following dependencies:
+
+  * **Spring Cloud Netflix Eureka Server**
+  * **Spring Boot Actuator**
+
+#### **Step 2: Add Dependencies to `pom.xml`**
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-dependencies</artifactId>
+    <version>2021.0.7</version>
+    <type>pom</type>
+    <scope>import</scope>
+</dependency>
+```
+
+#### **Step 3: Main Application Class**
+
+```java
+package com.example.eurekaserver;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+
+@SpringBootApplication
+@EnableEurekaServer  // Enables Eureka Server
+public class EurekaServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaServerApplication.class, args);
+    }
+}
+```
+
+#### **Step 4: Configuration in `application.yml`**
+
+```yaml
+server:
+  port: 8761  # Default Eureka server port
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    wait-time-in-ms-when-sync-empty: 0
+
+spring:
+  application:
+    name: eureka-server
+```
+
+#### **Step 5: Run the Eureka Server**
+
+* Run the application:
+
+  ```
+  mvn spring-boot:run
+  ```
+* Access the Eureka Dashboard:
+
+  ```
+  http://localhost:8761/
+  ```
+
+---
+
+### **2. Setting Up the Eureka Client (Microservice)**
+
+#### **Step 1: Create a Spring Boot Project for the Eureka Client**
+
+* Add the following dependencies:
+
+  * **Spring Boot Starter Web**
+  * **Spring Cloud Netflix Eureka Client**
+
+#### **Step 2: Add Dependencies to `pom.xml`**
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+#### **Step 3: Main Application Class**
+
+```java
+package com.example.eurekaclient;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@SpringBootApplication
+@EnableEurekaClient  // Enables Eureka Client
+public class EurekaClientApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaClientApplication.class, args);
+    }
+}
+```
+
+#### **Step 4: Configuration in `application.yml`**
+
+```yaml
+server:
+  port: 8081  # Port for the client application
+
+spring:
+  application:
+    name: client-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/  # Eureka Server URL
+  instance:
+    prefer-ip-address: true
+```
+
+#### **Step 5: Simple REST Controller**
+
+```java
+package com.example.eurekaclient.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ClientController {
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello from Eureka Client!";
+    }
+}
+```
+
+#### **Step 6: Run the Eureka Client**
+
+* Run the application:
+
+  ```
+  mvn spring-boot:run
+  ```
+* Access the service:
+
+  ```
+  http://localhost:8081/hello
+  ```
+
+---
+
+### **3. Accessing the Eureka Dashboard**
+
+Visit the Eureka Server dashboard again:
+
+```
+http://localhost:8761/
+```
+
+You should see your **client-service** registered.
+
+---
+
+### **4. Testing Service Discovery**
+
+Now that your Eureka client is registered with the server, you can access it via its registered name.
+
+* Run multiple instances of the client by changing the port in `application.yml`:
+
+  ```yaml
+  server:
+    port: 8082
+  ```
+* Access the endpoint:
+
+  ```
+  curl http://localhost:8081/hello
+  curl http://localhost:8082/hello
+  ```
+
+---
+
+### **5. Key Points:**
+
+* **Service Registration:** The client automatically registers with Eureka.
+* **Service Discovery:** Other microservices can find this client using its service name.
+* **Load Balancing:** Use **Ribbon** for client-side load balancing when multiple instances are registered.
+
+---
+
+### **Adding Load Balancing with Ribbon**
+
+Ribbon is a **client-side load balancer** from Netflix, often used with Eureka for distributing traffic across multiple instances of a service. Here’s how to integrate Ribbon with the existing Eureka server and clients.
+
+---
+
+#### **1. Add Ribbon Dependency to Eureka Client (`pom.xml`)**
+
+Add the following dependency to your **Eureka Client** project:
+
+```xml
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+```
+
+---
+
+#### **2. Update Eureka Client Application (`application.yml`)**
+
+Configure the Eureka client to use Ribbon for load balancing:
+
+```yaml
+server:
+  port: 8081  # Use different ports for multiple instances
+
+spring:
+  application:
+    name: client-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+client-service:
+  ribbon:
+    eureka:
+      enabled: true
+    listOfServers: localhost:8081,localhost:8082,localhost:8083  # For testing without Eureka
+```
+
+---
+
+#### **3. Create a REST Controller for Testing**
+
+```java
+// ClientController.java
+package com.example.eurekaclient.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ClientController {
+
+    @GetMapping("/hello")
+    public String hello(@RequestParam(defaultValue = "World") String name) {
+        return "Hello, " + name + "! From Port: " + System.getProperty("server.port");
+    }
+}
+```
+
+---
+
+#### **4. Create a Ribbon-Enabled Service Consumer**
+
+Create a new Spring Boot project (e.g., **client-consumer**) to act as the **load balancer**:
+
+**Add Dependencies (`pom.xml`):**
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+```
+
+**Main Application Class:**
+
+```java
+// ClientConsumerApplication.java
+package com.example.clientconsumer;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+
+@SpringBootApplication
+@EnableEurekaClient
+public class ClientConsumerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ClientConsumerApplication.class, args);
+    }
+}
+```
+
+**Service Class:**
+
+```java
+// ClientService.java
+package com.example.clientconsumer.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+public class ClientService {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public String callClientService(String name) {
+        return restTemplate.getForObject("http://client-service/hello?name=" + name, String.class);
+    }
+}
+```
+
+**Controller Class:**
+
+```java
+// ConsumerController.java
+package com.example.clientconsumer.controller;
+
+import com.example.clientconsumer.service.ClientService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ConsumerController {
+
+    @Autowired
+    private ClientService clientService;
+
+    @GetMapping("/consume")
+    public String consume(@RequestParam(defaultValue = "Ribbon") String name) {
+        return clientService.callClientService(name);
+    }
+}
+```
+
+**Configuration for Ribbon (`application.yml`):**
+
+```yaml
+server:
+  port: 8085  # Port for the consumer service
+
+spring:
+  application:
+    name: client-consumer
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+```
+
+---
+
+#### **5. Create a `RestTemplate` Bean for Load Balancing**
+
+```java
+// AppConfig.java
+package com.example.clientconsumer.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    @LoadBalanced  // Enables Ribbon load balancing
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+}
+```
+
+---
+
+#### **6. Run Multiple Instances of the Eureka Client**
+
+Run multiple instances of the **client-service** on different ports (e.g., 8081, 8082, 8083). Update the `server.port` in the `application.yml` of each instance:
+
+```yaml
+server:
+  port: 8082
+```
+
+---
+
+#### **7. Test the Load Balancer**
+
+Once everything is running, test the Ribbon load balancing:
+
+```bash
+curl http://localhost:8085/consume?name=John
+curl http://localhost:8085/consume?name=Jane
+curl http://localhost:8085/consume?name=Alice
+```
+
+You should see responses from different instances of **client-service** based on Ribbon’s load balancing strategy.
+
+---
+
+#### **8. Eureka Dashboard Verification**
+
+Go to the Eureka dashboard:
+
+```
+http://localhost:8761/
+```
+
+You should see all your client-service instances registered.
+
+---
+
+#### **9. Key Features of this Setup:**
+
+* **Service Discovery:** Eureka provides service registration and discovery.
+* **Client-Side Load Balancing:** Ribbon distributes the traffic among multiple instances.
+* **Fault Tolerance:** Ribbon automatically retries requests to healthy instances.
+
+
+

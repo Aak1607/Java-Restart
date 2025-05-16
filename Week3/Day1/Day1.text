@@ -1,0 +1,140 @@
+### **Spring Core Basics: Introduction to Spring Framework**
+
+it's like a toolkit that helps Java developers build applications faster and with less complexity. It offers 
+ready-made solutions for common tasks such as database management, security, and web development, making coding 
+easier and more organized.
+
+#### **1. Dependency Injection (DI) and Inversion of Control (IoC)**
+
+* **Inversion of Control (IoC)**: 
+Inversion of Control is a principle in software engineering which transfers the control of objects of a program to
+a framework. We most often use it in the context of object-oriented programming.
+In contrast with traditional programming, in which our custom code makes calls to a library, IoC enables a framework 
+to take control of the flow of a program and make calls to our custom code.
+
+* **Dependency Injection (DI)**: 
+Dependency injection is a pattern we can use to implement IoC, where the control being inverted is setting an 
+object’s dependencies.
+
+Connecting objects with other objects, or “injecting” objects into other objects, is done by an assembler rather than 
+by the objects themselves.
+
+**Types of DI in Spring:**
+
+* **Constructor Injection:** Dependencies are passed through the constructor.
+* **Setter Injection:** Dependencies are injected via setter methods.
+* **Field Injection:** (less common, used with annotations) Dependencies are injected directly into fields.
+
+**Example:**
+
+```java
+// Service interface
+public interface MessageService {
+    void sendMessage(String message);
+}
+
+// Service implementation
+public class EmailService implements MessageService {
+    public void sendMessage(String message) {
+        System.out.println("Email message sent: " + message);
+    }
+}
+
+// Client using DI
+public class Notification {
+    private MessageService messageService;
+
+    // Constructor Injection
+    public Notification(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    public void notifyUser(String message) {
+        messageService.sendMessage(message);
+    }
+}
+```
+
+In the above example, the `Notification` class doesn't create its own `MessageService`, promoting loose coupling.
+
+---
+
+#### **2. Bean Configuration (XML vs Annotation)**
+
+* **XML-Based Configuration:**
+
+  * Traditional way of configuring beans in Spring.
+  * Uses `beans.xml` files to define the beans and their dependencies.
+* **Annotation-Based Configuration:**
+
+  * Uses annotations like `@Component`, `@Autowired`, `@Configuration`, `@Bean`, etc.
+  * Reduces boilerplate XML and provides a more concise configuration style.
+
+**Example (XML)**
+
+```xml
+<!-- beans.xml -->
+<beans>
+    <bean id="emailService" class="EmailService"/>
+    <bean id="notification" class="Notification">
+        <constructor-arg ref="emailService"/>
+    </bean>
+</beans>
+```
+
+**Example (Annotation)**
+
+```java
+// EmailService.java
+@Component
+public class EmailService implements MessageService {
+    public void sendMessage(String message) {
+        System.out.println("Email message sent: " + message);
+    }
+}
+
+// Notification.java
+@Component
+public class Notification {
+    private final MessageService messageService;
+
+    @Autowired
+    public Notification(MessageService messageService) {
+        this.messageService = messageService;
+    }
+
+    public void notifyUser(String message) {
+        messageService.sendMessage(message);
+    }
+}
+
+// AppConfig.java
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig {
+}
+```
+
+---
+
+#### **3. DSA: 2 LinkedList Problems (Insert, Delete)**
+
+**Insertion:** Adding a node to the beginning, middle, or end of a LinkedList.
+**Deletion:** Removing a node by value or by index.
+
+#### **4. System Design: Microservices vs Monolithic (in detail)**
+
+| **Aspect**            | **Monolithic Architecture**                          | **Microservices Architecture**             |
+| --------------------- | ---------------------------------------------------- | ------------------------------------------ |
+| **Structure**         | Single codebase for the entire application           | Independent, loosely coupled services      |
+| **Scalability**       | Difficult to scale specific components               | Easily scalable at service level           |
+| **Deployment**        | Entire application must be redeployed for any update | Independent deployment of services         |
+| **Fault Tolerance**   | Single point of failure                              | Isolated failures, better resilience       |
+| **Technology Stack**  | Typically a single technology stack                  | Polyglot, can use different stacks         |
+| **Development Speed** | Slower as the codebase grows                         | Faster, smaller teams focused on services  |
+| **Communication**     | In-process calls                                     | Network calls (REST, gRPC, message queues) |
+| **Data Management**   | Single database for the entire application           | Decentralized, multiple databases possible |
+| **Testing**           | Simpler, but slower as the app grows                 | More complex, requires integration testing |
+
+---
+
